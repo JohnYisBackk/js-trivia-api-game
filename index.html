@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Trivia Game</title>
+  </head>
+  <body>
+    <!-- ====================================================== -->
+    <!-- BACKGROUND EFFECTS -->
+    <!-- ====================================================== -->
+
+    <div class="background-effects" aria-hidden="true">
+      <div class="background-glow background-glow-one"></div>
+      <div class="background-glow background-glow-two"></div>
+      <div class="background-glow background-glow-three"></div>
+    </div>
+
+    <!-- ====================================================== -->
+    <!-- HEADER -->
+    <!-- ====================================================== -->
+
+    <header class="header">
+      <div class="header-wrapper">
+        <a href="#" class="logo">
+          <i class="bi bi-patch-question-fill"></i>
+
+          <div class="logo-content">
+            <h1>Trivia API Game <span>PRO</span></h1>
+            <p>Real Questions. Real Knowledge. Real Fun.</p>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="#" class="nav-link active" data-link="home">
+            <i class="bi bi-house-door-fill"></i>
+            Home
+          </a>
+
+          <a href="#" class="nav-link" data-link="quiz">
+            <i class="bi bi-trophy-fill"></i>
+            Quiz
+          </a>
+
+          <a href="#" class="nav-link" data-link="stats">
+            <i class="bi bi-bar-chart-fill"></i>
+            Stats
+          </a>
+
+          <a href="#" class="nav-link" data-link="about">
+            <i class="bi bi-info-circle-fill"></i>
+            About
+          </a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="header-divider"></div>
+
+          <button
+            class="toggle-button"
+            id="toggleBtn"
+            type="button"
+            aria-label="Toggle theme"
+          >
+            <i class="bi bi-moon-fill"></i>
+            <p>Dark Mode</p>
+            <span class="toggle-switch"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ====================================================== -->
+    <!-- GAME STATS -->
+    <!-- ====================================================== -->
+
+    <main class="main">
+      <section class="game-stats-section">
+        <div class="game-stats-wrapper">
+          <div class="game-stats-boxes">
+            <div class="game-stat-box green">
+              <i class="bi bi-check-circle-fill stat-main-icon"></i>
+
+              <div class="box-content">
+                <p>Correct Answers</p>
+                <span id="correctAnswersValue" class="green">12</span>
+              </div>
+
+              <i class="bi bi-bar-chart-fill stat-chart-icon"></i>
+            </div>
+
+            <div class="game-stat-box red">
+              <i class="bi bi-x-circle-fill stat-main-icon"></i>
+
+              <div class="box-content">
+                <p>Wrong Answers</p>
+                <span id="wrongAnswersValue" class="red">3</span>
+              </div>
+
+              <i class="bi bi-bar-chart-fill stat-chart-icon"></i>
+            </div>
+
+            <div class="game-stat-box purple">
+              <i class="bi bi-fire stat-main-icon"></i>
+
+              <div class="box-content">
+                <p>Current Streak</p>
+                <span id="currentStreakValue" class="purple">5</span>
+              </div>
+
+              <i class="bi bi-bar-chart-fill stat-chart-icon"></i>
+            </div>
+
+            <div class="game-stat-box yellow">
+              <i class="bi bi-star-fill stat-main-icon"></i>
+
+              <div class="box-content">
+                <p>Total Score</p>
+                <span id="totalScoreValue" class="yellow">240</span>
+              </div>
+
+              <i class="bi bi-bar-chart-fill stat-chart-icon"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- MAIN CONTENT -->
+      <!-- ====================================================== -->
+
+      <div class="content-layout">
+        <div class="left-column">
+          <!-- ====================================================== -->
+          <!-- QUIZ SETTINGS -->
+          <!-- ====================================================== -->
+
+          <section class="quiz-settings-section">
+            <div class="quiz-settings-wrapper">
+              <div class="quiz-heading">
+                <i class="bi bi-gear-fill"></i>
+
+                <div class="quiz-heading-content">
+                  <h3>Quiz Settings</h3>
+                  <p>Customize your trivia experience</p>
+                </div>
+              </div>
+
+              <form class="quiz-form">
+                <div class="form-group">
+                  <label for="difficultySelect">
+                    <i class="bi bi-bar-chart-fill"></i>
+                    Difficulty
+                  </label>
+
+                  <select id="difficultySelect">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="categorySelect">
+                    <i class="bi bi-grid-fill"></i>
+                    Category
+                  </label>
+
+                  <select id="categorySelect">
+                    <option value="9" selected>General Knowledge</option>
+                    <option value="11">Film</option>
+                    <option value="12">Music</option>
+                    <option value="17">Science & Nature</option>
+                    <option value="18">Computers</option>
+                    <option value="21">Sports</option>
+                    <option value="22">Geography</option>
+                    <option value="23">History</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="questionsSelect">
+                    <i class="bi bi-question-circle-fill"></i>
+                    Questions
+                  </label>
+
+                  <select id="questionsSelect">
+                    <option value="5">5 Questions</option>
+                    <option value="10" selected>10 Questions</option>
+                    <option value="15">15 Questions</option>
+                    <option value="20">20 Questions</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="timeLimitSelect">
+                    <i class="bi bi-clock-fill"></i>
+                    Time Limit
+                  </label>
+
+                  <select id="timeLimitSelect">
+                    <option value="15">15 Seconds</option>
+                    <option value="30" selected>30 Seconds</option>
+                    <option value="45">45 Seconds</option>
+                    <option value="60">60 Seconds</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- ====================================================== -->
+          <!-- API STATUS -->
+          <!-- ====================================================== -->
+
+          <section class="api-status-section">
+            <div class="api-status-wrapper">
+              <div class="api-heading">
+                <i class="bi bi-wifi"></i>
+
+                <div class="api-heading-content">
+                  <h3>API Status</h3>
+                  <p>Powered by Open Trivia Database</p>
+                </div>
+                <div class="api-status-badge">
+                  <div class="dot"></div>
+                  <span id="apiStatusValue">Online</span>
+                </div>
+              </div>
+
+              <div class="api-connection-box">
+                <i class="bi bi-database-fill"></i>
+
+                <div class="api-connection-content">
+                  <p>API Connection</p>
+                  <span id="apiConnectionText"
+                    >Successfully connected to OpenTDB API</span
+                  >
+                </div>
+                <i class="bi bi-check-circle-fill api-circle-icon"></i>
+              </div>
+
+              <div class="api-stats">
+                <div class="api-stat-content response-time">
+                  <i class="bi bi-lightning-charge-fill"></i>
+
+                  <div class="api-stat-text">
+                    <p>Response Time</p>
+                    <span id="responseTimeValue">120 ms</span>
+                  </div>
+                </div>
+
+                <div class="api-divider"></div>
+
+                <div class="api-stat-content questions">
+                  <i class="bi bi-journal-text"></i>
+
+                  <div class="api-stat-text">
+                    <p>Questions</p>
+                    <span id="questionsValue">50,000+</span>
+                  </div>
+                </div>
+
+                <div class="api-divider"></div>
+
+                <div class="api-stat-content uptime">
+                  <i class="bi bi-graph-up-arrow"></i>
+
+                  <div class="api-stat-text">
+                    <p>Uptime</p>
+                    <span id="uptimeValue">99.9%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ====================================================== -->
+        <!-- MAIN CONTENT -->
+        <!-- ====================================================== -->
+
+        <section class="main-trivia-section">
+          <div class="main-trivia-wrapper">
+            <div class="main-heading">
+              <div class="main-header-left">
+                <i class="bi bi-lightning-charge-fill"></i>
+
+                <div class="main-header-left-content">
+                  <h2>Live Trivia Round</h2>
+                  <p>
+                    Test your knowledge with real questions from the Open Trivia
+                    Database!
+                  </p>
+                </div>
+              </div>
+
+              <div class="main-header-right">
+                <p id="questionProgressText">Question 3 of 10</p>
+
+                <div class="main-header-percent-line">
+                  <div class="main-line">
+                    <div class="main-line-fill" id="questionsLineFill"></div>
+                  </div>
+
+                  <span id="questionsLineValue">30%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-stats">
+              <div class="main-stat-box purple">
+                <i class="bi bi-grid-fill"></i>
+
+                <div class="main-stat-content">
+                  <p>Category</p>
+                  <span id="categoryValue">General Knowledge</span>
+                </div>
+              </div>
+
+              <div class="main-stat-box green">
+                <i class="bi bi-bar-chart-fill"></i>
+
+                <div class="main-stat-content">
+                  <p>Difficulty</p>
+                  <span id="difficultyValue">Medium</span>
+                </div>
+              </div>
+
+              <div class="main-stat-box blue">
+                <i class="bi bi-clock-fill"></i>
+
+                <div class="main-stat-content">
+                  <p>Time Left</p>
+                  <span id="timeLeftValue">00:18</span>
+                </div>
+              </div>
+
+              <div class="main-stat-box yellow">
+                <i class="bi bi-star-fill"></i>
+
+                <div class="main-stat-content">
+                  <p>Score</p>
+                  <span id="scoreValue">20 pts</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="question-box" id="questionBox">
+              <p id="questionText">What is the chemical symbol for gold?</p>
+            </div>
+
+            <div class="answers-boxes" id="answersBoxes">
+              <button class="answer-box" type="button" data-answer="A">
+                <span class="answer-icon">A</span>
+                <span class="answer-text">Go</span>
+              </button>
+
+              <button class="answer-box" type="button" data-answer="B">
+                <span class="answer-icon">B</span>
+                <span class="answer-text">Au</span>
+              </button>
+
+              <button class="answer-box" type="button" data-answer="C">
+                <span class="answer-icon">C</span>
+                <span class="answer-text">Ag</span>
+              </button>
+
+              <button class="answer-box" type="button" data-answer="D">
+                <span class="answer-icon">D</span>
+                <span class="answer-text">Gd</span>
+              </button>
+            </div>
+
+            <div class="main-actions-buttons">
+              <button class="hint-button" id="hintBtn" type="button">
+                <i class="bi bi-lightbulb-fill"></i>
+                Use Hint <span id="hintValue">(1)</span>
+              </button>
+
+              <button
+                class="next-question-button"
+                id="nextQuestionBtn"
+                type="button"
+              >
+                Next Question
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ====================================================== -->
+    <!-- FOOTER -->
+    <!-- ====================================================== -->
+
+    <footer class="footer">
+      <div class="footer-wrapper">
+        <div class="footer-left">
+          <span>
+            <i class="bi bi-trophy-fill"></i>
+            Pro Tip:
+          </span>
+
+          <p>
+            Keep a streak going to increase your score! The harder the
+            difficulty, the more points you earn.
+          </p>
+        </div>
+
+        <div class="footer-right">
+          <i class="bi bi-heart-fill"></i>
+          <p>Knowledge today. A smarter you tomorrow.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
