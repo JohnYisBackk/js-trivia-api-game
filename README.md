@@ -6,7 +6,7 @@ The application connects to the **Open Trivia Database API (OpenTDB)** and dynam
 
 ## 🚀 Live Demo
 
-👉 [View Live Demo]()
+👉 [View Live Demo](https://johnyisbackk.github.io/js-trivia-api-game/)
 
 ## 📸 Preview
 
